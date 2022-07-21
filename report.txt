@@ -1,0 +1,52 @@
+TensorFlow 2.0 Upgrade Script
+-----------------------------
+Converted 1 files
+Detected 8 issues that require attention
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+File: models/zico_mnist.py
+--------------------------------------------------------------------------------
+models/zico_mnist.py:15:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+models/zico_mnist.py:16:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+models/zico_mnist.py:17:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+models/zico_mnist.py:18:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+models/zico_mnist.py:19:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+models/zico_mnist.py:20:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+models/zico_mnist.py:21:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+models/zico_mnist.py:22:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+================================================================================
+Detailed log follows:
+
+================================================================================
+--------------------------------------------------------------------------------
+Processing file 'models/zico_mnist.py'
+ outputting to 'test_zico_v2.py'
+--------------------------------------------------------------------------------
+
+10:0: INFO: Renamed 'tf.disable_v2_behavior' to 'tf.compat.v1.disable_v2_behavior'
+15:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+15:13: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+16:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+16:13: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+17:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+17:13: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+18:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+18:13: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+19:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+19:13: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+20:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+20:13: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+21:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+21:13: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+22:13: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+22:13: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+24:12: INFO: Added keywords to args of function 'tf.pad'
+25:12: INFO: Added keywords to args of function 'tf.nn.conv2d'
+25:12: INFO: Renamed keyword argument for tf.nn.conv2d from filter to filters
+28:12: INFO: Added keywords to args of function 'tf.pad'
+29:12: INFO: Added keywords to args of function 'tf.nn.conv2d'
+29:12: INFO: Renamed keyword argument for tf.nn.conv2d from filter to filters
+32:12: INFO: Added keywords to args of function 'tf.transpose'
+33:27: INFO: Added keywords to args of function 'tf.shape'
+--------------------------------------------------------------------------------
+
