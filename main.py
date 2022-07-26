@@ -567,10 +567,9 @@ def defense_by_attack(hps, lambda1=100, lambda2=100, noise=False, test_num=0):
                 net_pred = tf.argmax(net_logits, axis=1)
 
                 # L = L0 + λ1L1 + λ2L2
-                obj = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(logits=net_logits, labels=target_np))
-                    # lambda1 * tf.reduce_mean(tf.maximum(tf.square(ref_z - adv_z) - args.z_eps ** 2, 0.0)) + \
-                    # lambda2 * tf.reduce_mean(
-                    # tf.nn.sparse_softmax_cross_entropy_with_logits(logits=acgan_logits, labels=source_np))
+                obj = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(logits=net_logits, labels=target_np)) + \
+                    lambda2 * tf.reduce_mean(
+                    tf.nn.sparse_softmax_cross_entropy_with_logits(logits=acgan_logits, labels=source_np))
 
                 # modified objective function
                 # obj = custom_loss(logits=net_logits, y_true=target_np) + \
