@@ -14,4 +14,5 @@ fgsm_images_zico.npz
 fgsm_images.npz
 pgd_images_zico.npz
 pgd_images.npz
+spsa_images_zico.npz
 model_2
