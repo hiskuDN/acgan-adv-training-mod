@@ -50,7 +50,7 @@ parser.add_argument('--lambda1', type=float, default=100,
                     help="coefficient for the closeness regularization term")
 parser.add_argument('--lambda2', type=float, default=100,
                     help="coefficient for the repulsive regularization term")
-parser.add_argument('--n2collect', type=int, default=1024,
+parser.add_argument('--n2collect', type=int, default=100,
                     help="number of adversarial examples to collect")
 parser.add_argument('--eps', type=float, default=0.1,
                     help="eps for attack augmented with noise")
@@ -465,28 +465,27 @@ def untargeted_attack(hps, lambda1, lambda2, source, noise=False):
             break
 
 #  define a custom_loss with tensorflow cosine similarity
+
+
 def custom_loss(logits, y_true):
     # extract y_pred from logits
     y_pred = tf.cast(tf.argmax(logits, axis=1), tf.float32)
     y_true = tf.cast(y_true, tf.float32)
-    # cosine_loss = CosineSimilarity(axis=0)
-    # sim_matrix = cosine_loss(y_true, y_pred)
+    cosine_loss = CosineSimilarity(axis=0)
+    sim_matrix = cosine_loss(y_true, y_pred)
 
-    # # apply negative removal to sim_matrix
-    # sim_matrix = -1 * sim_matrix
+    # apply negative removal to sim_matrix
+    sim_matrix = -1 * sim_matrix
 
-    # # for numerical stability
-    # sim_matrix = tf.nn.relu(sim_matrix) - tf.stop_gradient(sim_matrix)
+    # for numerical stability
+    sim_matrix = tf.nn.relu(sim_matrix) - tf.stop_gradient(sim_matrix)
 
-    # sim_matrix = tf.math.log(tf.math.exp(sim_matrix))
+    sim_matrix = tf.math.log(tf.math.exp(sim_matrix))
 
-    # return tf.reduce_mean(sim_matrix)
-
-    squared_difference = tf.square(y_true - y_pred)
-    return tf.reduce_mean(squared_difference, axis=-1)
+    return tf.reduce_mean(sim_matrix)
 
 
-def defense_by_attack(hps, lambda1=100, lambda2=100, noise=False, test_num=0):
+def defense_by_attack(hps, lambda1=100, lambda2=20, noise=False, test_num=0):
     """defense by attack using ac-gans"""
 
     if args.classifier == 'zico':
@@ -569,7 +568,8 @@ def defense_by_attack(hps, lambda1=100, lambda2=100, noise=False, test_num=0):
                 # L = L0 + λ1L1 + λ2L2
                 obj = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(logits=net_logits, labels=target_np)) + \
                     lambda2 * tf.reduce_mean(
-                    tf.nn.sparse_softmax_cross_entropy_with_logits(logits=acgan_logits, labels=source_np))
+                    tf.nn.sparse_softmax_cross_entropy_with_logits(logits=acgan_logits, labels=source_np)) + \
+                    lambda2 * custom_loss(logits=net_logits, y_true=target_np)
 
                 # modified objective function
                 # obj = custom_loss(logits=net_logits, y_true=target_np) + \
@@ -692,7 +692,8 @@ def defense_by_attack(hps, lambda1=100, lambda2=100, noise=False, test_num=0):
                             classifier += '_adv'
 
                         # cast test_num to string
-                        folder_format = '{}_{}_defense_by_attack_with_z' + str(test_num)
+                        folder_format = '{}_{}_defense_by_attack_with_z' + \
+                            str(test_num)
                         if noise:
                             folder_format += '_noise'
                         np.savez(os.path.join(check_folder(folder_format.format(args.dataset, classifier)),
