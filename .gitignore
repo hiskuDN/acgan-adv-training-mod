@@ -2,13 +2,14 @@
 .ipynb_checkpoints
 assets
 __pycache__
+mnist_zico_defense_by_attack_with_z
 mnist_zico_defense_by_attack_with_z0
 mnist_zico_defense_by_attack_with_z1
 mnist_zico_defense_by_attack_with_z2
 mnist_zico_defense_by_attack_with_z3
 mnist_zico_defense_by_attack_with_z4
 mnist_zico_defense_by_attack_with_z5
-mnist_zico_defense_by_attack_with_z
+mnist_zico_defense_by_attack_with_z6
 mnist_zico_untargeted_attack
 checkpoints
 checkpoints-celebA
@@ -17,4 +18,8 @@ fgsm_images.npz
 pgd_images_zico.npz
 pgd_images.npz
 spsa_images_zico.npz
+bim_images.npz
+cl2m_images.npz
+ifs_images.npz
+patched_images.npz
 model_2
