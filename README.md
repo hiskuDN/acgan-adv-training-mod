@@ -27,6 +27,14 @@ CUDA_VISIBLE_DEVICES=0 python main.py --mode targeted_attack --dataset mnist --c
 CUDA_VISIBLE_DEVICES=0 python main.py --mode defense_by_attack --dataset mnist --classifier zico
 ```
 
+* run the following before running defense by attack \
+```bash
+pip install opencv-python
+apt-get update -y
+apt-get install -y libgl1-mesa-glx
+pip install tf_slim
+pip install imageio
+```
 attacks the provable defense method from [Kolter & Wong, 2018](https://arxiv.org/pdf/1711.00851.pdf) on the `MNIST` dataset, with the source class being 0 and target class being 1. 
 
 Run `python main.py --help` to view more argument options. For hyperparameters such as `--noise`, `--lambda1`, `--lambda2`, `--eps`,  `--z_eps`, `--lr`, and `--n_iters` (in that order), please refer to **Table. 4** in the Appendix of our [paper](https://arxiv.org/pdf/1805.07894.pdf). 
