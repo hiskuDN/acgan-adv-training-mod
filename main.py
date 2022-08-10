@@ -50,7 +50,7 @@ parser.add_argument('--lambda1', type=float, default=100,
                     help="coefficient for the closeness regularization term")
 parser.add_argument('--lambda2', type=float, default=100,
                     help="coefficient for the repulsive regularization term")
-parser.add_argument('--n2collect', type=int, default=100,
+parser.add_argument('--n2collect', type=int, default=1024,
                     help="number of adversarial examples to collect")
 parser.add_argument('--eps', type=float, default=0.1,
                     help="eps for attack augmented with noise")
@@ -566,17 +566,17 @@ def defense_by_attack(hps, lambda1=100, lambda2=20, noise=False, test_num=0):
                 net_pred = tf.argmax(net_logits, axis=1)
 
                 # L = L0 + λ1L1 + λ2L2
-                obj = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(logits=net_logits, labels=target_np)) + \
-                    lambda1 * tf.reduce_mean(tf.maximum(tf.square(ref_z - adv_z) - args.z_eps ** 2, 0.0)) + \
-                    lambda2 * tf.reduce_mean(
-                    tf.nn.sparse_softmax_cross_entropy_with_logits(logits=acgan_logits, labels=source_np)) + \
-                    lambda2 * custom_loss(logits=net_logits, y_true=target_np)
-
-                # modified objective function
-                # obj = custom_loss(logits=net_logits, y_true=target_np) + \
+                # obj = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(logits=net_logits, labels=target_np)) + \
                 #     lambda1 * tf.reduce_mean(tf.maximum(tf.square(ref_z - adv_z) - args.z_eps ** 2, 0.0)) + \
                 #     lambda2 * tf.reduce_mean(
-                #     tf.nn.sparse_softmax_cross_entropy_with_logits(logits=acgan_logits, labels=source_np))
+                #     tf.nn.sparse_softmax_cross_entropy_with_logits(logits=acgan_logits, labels=source_np)) + \
+                #     lambda2 * custom_loss(logits=net_logits, y_true=target_np)
+
+                # modified objective function
+                obj = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(logits=net_logits, labels=target_np)) + \
+                    custom_loss(logits=net_logits, y_true=target_np) + \
+                    lambda2 * tf.reduce_mean(
+                    tf.nn.sparse_softmax_cross_entropy_with_logits(logits=acgan_logits, labels=source_np))
 
                 _iter = tf.placeholder(tf.float32, shape=(), name="iter")
                 with tf.variable_scope("train_ops"):
