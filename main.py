@@ -50,7 +50,7 @@ parser.add_argument('--lambda1', type=float, default=100,
                     help="coefficient for the closeness regularization term")
 parser.add_argument('--lambda2', type=float, default=100,
                     help="coefficient for the repulsive regularization term")
-parser.add_argument('--n2collect', type=int, default=1024,
+parser.add_argument('--n2collect', type=int, default=50,
                     help="number of adversarial examples to collect")
 parser.add_argument('--eps', type=float, default=0.1,
                     help="eps for attack augmented with noise")
