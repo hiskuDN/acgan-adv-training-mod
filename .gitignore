@@ -24,3 +24,5 @@ cl2m_images.npz
 ifs_images.npz
 patched_images.npz
 model_2
+celebA_weights
+training_history
